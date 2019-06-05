@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="DXSample.Views.ChildView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"             
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm">
+
+    <Grid>
+        <dxmvvm:Interaction.Behaviors>
+            <dxmvvm:CurrentWindowService />
+        </dxmvvm:Interaction.Behaviors>
+        <DockPanel>
+            <dxb:MainMenuControl DockPanel.Dock="Top">
+                <dxb:BarButtonItem BarItemDisplayMode="ContentAndGlyph"
+                                   Command="{Binding CloseWindowCommand}"
+                                   Content="Close it"
+                                   Glyph="{dx:DXImage Image=Close_16x16.png}" />
+                <dxb:BarButtonItem BarItemDisplayMode="ContentAndGlyph"
+                                   Command="{Binding TemporarilyHideWindowCommand}"
+                                   Content="Temporarily Hide and Show Maximized"
+                                   Glyph="{dx:DXImage Image=Time_16x16.png}" />
+                <dxb:BarEditItem Content="Window state:"
+                                 EditValue="{Binding Path=WindowState}">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType={x:Type WindowState}}" />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+            </dxb:MainMenuControl>
+            <TextBox Margin="10"
+                     Text="{Binding Caption, UpdateSourceTrigger=PropertyChanged}" />
+        </DockPanel>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="DXSample.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:ViewModels="clr-namespace:DXSample.ViewModels"
+             xmlns:Views="clr-namespace:DXSample.Views">
+
+    <UserControl.DataContext>
+        <ViewModels:MainViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+        <dxmvvm:Interaction.Behaviors>
+            <dxmvvm:WindowService>
+                <dxmvvm:WindowService.ViewTemplate>
+                    <DataTemplate>
+                        <Views:ChildView/>
+                    </DataTemplate>
+                </dxmvvm:WindowService.ViewTemplate>
+                <dxmvvm:WindowService.WindowStyle>
+                    <Style TargetType="dx:ThemedWindow">
+                        <Setter Property="Width" Value="500" />
+                        <Setter Property="Height" Value="300" />
+                        <Setter Property="Title" Value="{Binding Caption}" />
+                        <Setter Property="WindowState" Value="{Binding WindowState}" />
+                    </Style>
+                </dxmvvm:WindowService.WindowStyle>
+            </dxmvvm:WindowService>
+        </dxmvvm:Interaction.Behaviors>
+        <DockPanel>
+            <dxb:MainMenuControl DockPanel.Dock="Top">
+                <dxb:BarButtonItem BarItemDisplayMode="ContentAndGlyph"
+                                   Command="{Binding ShowChildWindowCommand}"
+                                   Content="Show"
+                                   Glyph="{dx:DXImage Image=Show_16x16.png}" />
+                <dxb:BarButtonItem BarItemDisplayMode="ContentAndGlyph"
+                                   Command="{Binding CloseChildWindowCommand}"
+                                   Content="Close"
+                                   Glyph="{dx:DXImage Image=Close_16x16.png}" />
+            </dxb:MainMenuControl>
+        </DockPanel>
+    </Grid>
+
+</UserControl>
